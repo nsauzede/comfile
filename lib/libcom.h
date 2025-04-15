@@ -1,4 +1,6 @@
-/* libcom.h: Header file for the .com standard library.
+/* libcom.h: Header file for the .com standard library. (0.3)
+ * Copyright 2019 by Brian Raiter
+ * Slight changes (0.4): build w/ recent compilers, support main return value.
  * Copyright 2019 by Brian Raiter
  * Copying and distribution of this file, with or without
  * modification, are permitted in any medium without royalty provided
@@ -17,7 +19,7 @@ extern long write(int fd, void const *buf, long size);
 extern int close(int fd);
 extern void *brk(void const *p);
 extern void __attribute__((noreturn)) exit(int code);
-extern long strlen(char const *str);
+extern long unsigned int strlen(char const *str);
 extern int fprint(int fd, char const *str);
 
 #define print(str) (fprint(1, (str)))
@@ -30,6 +32,6 @@ extern int fprint(int fd, char const *str);
 #define O_TRUNC  0x0100
 #define O_APPEND 0x0200
 
-#define MAIN void __attribute__((section(".main"))) _main
+#define MAIN int __attribute__((section(".main"))) _main
 
 #endif
